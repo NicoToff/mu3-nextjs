@@ -1,14 +1,17 @@
 import { useState, useEffect, useRef } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
+
 import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridRowsProp, GridColDef, GridValidRowModel } from "@mui/x-data-grid";
 
 import { connect } from "mqtt";
 import type { MqttClient } from "mqtt";
 
-const mqttDomain = "178.32.223.217";
+const mqttDomain = "backup.kermareg.be";
 const port = 9001;
 const mqttUri = `ws://${mqttDomain}`;
 const options = {
@@ -20,6 +23,7 @@ const options = {
 
 export default function Mqtt() {
     const [time, setTime] = useState(new Date().toLocaleTimeString());
+    const { data: session } = useSession();
 
     useEffect(() => {
         const timer = setInterval(() => setTime(new Date().toLocaleTimeString()), 1000);
@@ -66,8 +70,13 @@ export default function Mqtt() {
         { field: "date", headerName: "Date (ISO)", width: 200 },
     ];
 
+    if (!session) return <button onClick={() => signIn("discord")}>Please, log in</button>;
+
     return (
         <Container>
+            <Button onClick={() => signOut()} variant="contained">
+                Log out
+            </Button>
             <Typography variant="h3" component="h1" gutterBottom>
                 MU3 Tags
             </Typography>
