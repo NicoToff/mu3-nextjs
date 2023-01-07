@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 import { ColonneLumineuse } from "../components/ColonneLumineuse";
 
@@ -11,7 +12,9 @@ export default function System() {
 
     return (
         <div className="container">
-            <h1>Système intelligent</h1>
+            <Typography variant="h2" component="h1" m={3}>
+                Système intelligent
+            </Typography>
 
             <Grid container md={6}>
                 <Grid item>

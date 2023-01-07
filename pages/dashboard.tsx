@@ -49,7 +49,9 @@ export default function Dashboard({ tags }: DashboardProps) {
         <div className="container">
             <div className="row">
                 <div className="col-12">
-                    <h1>Dashboard</h1>
+                    <Typography variant="h2" component="h1" m={3}>
+                        Dashboard
+                    </Typography>
                 </div>
 
                 <Typography gutterBottom>{`Le tableau contient les dernières données insérées dans la base de données.

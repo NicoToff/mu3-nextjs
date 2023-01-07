@@ -139,8 +139,8 @@ export default function Mqtt({ tags }: MqttProps) {
     ];
 
     return (
-        <Container>
-            <Typography variant="h3" component="h1" gutterBottom>
+        <div className="container">
+            <Typography variant="h2" component="h1" m={3}>
                 MU3 Tags
             </Typography>
             {mqttConnected ? (
@@ -153,6 +153,6 @@ export default function Mqtt({ tags }: MqttProps) {
             <div style={{ height: "95vh", width: "99%" }}>
                 <DataGrid rows={rows} columns={columns} sx={{ color: "whitesmoke" }} />
             </div>
-        </Container>
+        </div>
     );
 }
