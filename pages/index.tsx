@@ -41,6 +41,7 @@ const Home: NextPage = () => {
                     width={1200}
                     height={500}
                     alt="MU3 photo"
+                    priority
                 />
             </div>
         </>

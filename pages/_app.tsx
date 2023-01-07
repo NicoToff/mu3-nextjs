@@ -16,8 +16,8 @@ const MyApp: AppType<{ session: Session | null }> = ({ Component, pageProps: { s
         <>
             <Head>
                 <meta charSet="utf-8" />
-                <meta name="viewport" content="width= device-width, inital-scale=1, shrink-to-fit=no" />
-                <link rel="stylesheet" href="https://bootswatch.com/5/darkly/bootstrap.css" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
             </Head>
 
             <SessionProvider session={session}>

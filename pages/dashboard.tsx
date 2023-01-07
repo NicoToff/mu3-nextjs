@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react";
 import Typography from "@mui/material/Typography";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridRowsProp, GridColDef, GridValidRowModel } from "@mui/x-data-grid";

@@ -8,7 +8,6 @@ import type { GridRowsProp, GridColDef, GridValidRowModel } from "@mui/x-data-gr
 
 import { connect } from "mqtt";
 import type { MqttClient } from "mqtt";
-import Navbar from "../components/Navbar";
 
 import { prisma } from "../prisma/prisma-client";
 import type { Tag } from "@prisma/client";
