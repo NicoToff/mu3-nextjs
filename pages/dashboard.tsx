@@ -1,13 +1,7 @@
-import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
-import { Login } from "../components/Login";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Switch from "@mui/material/Switch";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridRowsProp, GridColDef, GridValidRowModel } from "@mui/x-data-grid";
-
-import Navbar from "../components/Navbar";
 
 import { prisma } from "../prisma/prisma-client";
 import type { Tag } from "@prisma/client";
@@ -31,8 +25,6 @@ export async function getServerSideProps() {
 type DashboardProps = { tags: Tag[] };
 
 export default function Dashboard({ tags }: DashboardProps) {
-    const { data: session } = useSession();
-
     const columns: GridColDef[] = [
         { field: "tag", headerName: "Tag", width: 250 },
         { field: "val", headerName: "Valeur", width: 200 },
@@ -54,30 +46,20 @@ export default function Dashboard({ tags }: DashboardProps) {
             ? `${SPACE_FOR_HEADER_AND_FOOTER + (rows.length || 1) * MATERIAL_UI_STANDARD_ROW_HEIGHT}px`
             : SCREEN_FITTING_HEIGHT;
 
-    if (!session) {
-        return <Login />;
-    }
-
     return (
-        <>
-            <Navbar />
+        <div className="container">
+            <div className="row">
+                <div className="col-12">
+                    <h1>Dashboard</h1>
+                </div>
 
-            <div className="container">
-                <div className="row">
-                    <div className="col-12">
-                        <h1>Dashboard</h1>
-                    </div>
-
-                    <Typography
-                        gutterBottom
-                    >{`Le tableau contient les dernières données insérées dans la base de données.
+                <Typography gutterBottom>{`Le tableau contient les dernières données insérées dans la base de données.
                        Les tags visibles ont été choisis par l'administrateur.
                        Il n'est pas mis à jour automatiquement.`}</Typography>
-                    <div style={{ height, width: "99%" }}>
-                        <DataGrid rows={rows} columns={columns} sx={{ color: "whitesmoke" }} />
-                    </div>
+                <div style={{ height, width: "99%" }}>
+                    <DataGrid rows={rows} columns={columns} sx={{ color: "whitesmoke" }} />
                 </div>
             </div>
-        </>
+        </div>
     );
 }

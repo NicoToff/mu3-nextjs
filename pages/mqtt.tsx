@@ -1,6 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { useSession } from "next-auth/react";
-import { Login } from "../components/Login";
 import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -43,8 +41,6 @@ const options = {
 type MqttProps = { tags: Tag[] };
 
 export default function Mqtt({ tags }: MqttProps) {
-    const { data: session } = useSession();
-
     const [tagMap, setTagMap] = useState(new Map<string, number>(tags.map(t => [t.name, t.isVisible ? 1 : 0])));
 
     const [rows, setRows] = useState<GridRowsProp>([]);
@@ -144,29 +140,21 @@ export default function Mqtt({ tags }: MqttProps) {
         },
     ];
 
-    if (!session) {
-        return <Login />;
-    }
     return (
-        <>
-            <Navbar />
-            <Container>
-                <Typography variant="h3" component="h1" gutterBottom>
-                    MU3 Tags
-                </Typography>
-                {mqttConnected ? (
-                    <Chip label="MQTT Connected" color="success" sx={{ mb: 3 }} />
-                ) : (
-                    <Chip label="MQTT Disconnected" color="error" sx={{ mb: 3 }} />
-                )}
-                <Typography
-                    gutterBottom
-                >{`Le tableau ci-dessous est mis à jour en temps réel. Les tags marqués "Actifs"
+        <Container>
+            <Typography variant="h3" component="h1" gutterBottom>
+                MU3 Tags
+            </Typography>
+            {mqttConnected ? (
+                <Chip label="MQTT Connected" color="success" sx={{ mb: 3 }} />
+            ) : (
+                <Chip label="MQTT Disconnected" color="error" sx={{ mb: 3 }} />
+            )}
+            <Typography gutterBottom>{`Le tableau ci-dessous est mis à jour en temps réel. Les tags marqués "Actifs"
                 seront visibles sur la page Dashboard.`}</Typography>
-                <div style={{ height: "95vh", width: "99%" }}>
-                    <DataGrid rows={rows} columns={columns} sx={{ color: "whitesmoke" }} />
-                </div>
-            </Container>
-        </>
+            <div style={{ height: "95vh", width: "99%" }}>
+                <DataGrid rows={rows} columns={columns} sx={{ color: "whitesmoke" }} />
+            </div>
+        </Container>
     );
 }

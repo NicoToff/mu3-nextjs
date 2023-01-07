@@ -6,6 +6,7 @@ import "@fontsource/roboto/700.css";
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
+import { LoginWrapper } from "../components/LoginWrapper";
 
 import Head from "next/head";
 import Script from "next/script";
@@ -20,7 +21,9 @@ const MyApp: AppType<{ session: Session | null }> = ({ Component, pageProps: { s
             </Head>
 
             <SessionProvider session={session}>
-                <Component {...pageProps} />
+                <LoginWrapper>
+                    <Component {...pageProps} />
+                </LoginWrapper>
             </SessionProvider>
 
             <Script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" />
