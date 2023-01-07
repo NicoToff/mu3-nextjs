@@ -6,6 +6,7 @@ import { MqttConnected } from "../components/MqttConnected";
 import { connect } from "mqtt";
 import type { MqttClient } from "mqtt";
 import { ColonneLumineuse } from "../components/ColonneLumineuse";
+import { CardCanvas } from "../components/_CardCanvas";
 
 const mqttDomain = "backup.kermareg.be";
 const port = 9001;
@@ -22,6 +23,7 @@ export default function System() {
     const [orangeState, setOrangeState] = useState(false);
     const [greenState, setGreenState] = useState(false);
     const [blueState, setBlueState] = useState(false);
+    const [pinceValue, setPinceValue] = useState("0");
 
     const client = useRef<MqttClient>();
     const [mqttConnected, setMqttConnected] = useState(false);
@@ -36,7 +38,13 @@ export default function System() {
 
     useEffect(() => {
         if (!client.current) return;
-        client.current.subscribe("/groupe2/#");
+        client.current.subscribe([
+            "/groupe2/Voyant_rouge",
+            "/groupe2/Voyant_orange",
+            "/groupe2/Voyant_vert",
+            "/groupe2/Gyrophare_maintenance",
+            "/groupe2/M_Pince_Homing",
+        ]);
         client.current.on("message", (topic, message) => {
             const tag = topic.split("/").pop(); // Gets the last word of the topic
             if (tag) {
@@ -47,6 +55,7 @@ export default function System() {
                     case "Voyant_orange": setOrangeState(state); break;
                     case "Voyant_vert": setGreenState(state); break;
                     case "Gyrophare_maintenance": setBlueState(state); break;
+                    case "M_Pince_Homing": setPinceValue(message.toString()); break;
                 }
             }
         });
@@ -63,8 +72,10 @@ export default function System() {
                 Système intelligent
             </Typography>
             <MqttConnected connected={mqttConnected} />
-
-            <Grid container md={6}>
+            <Typography variant="body1" gutterBottom>
+                Ces valeurs sont mises à jour en temps réel.
+            </Typography>
+            <Grid container spacing={1}>
                 <Grid item>
                     <ColonneLumineuse
                         redState={redState}
@@ -72,6 +83,13 @@ export default function System() {
                         greenState={greenState}
                         blueState={blueState}
                     />
+                </Grid>
+                <Grid item>
+                    <CardCanvas title="Pince Homing" subheader="Valeur du capteur.">
+                        <Typography variant="h1" component="p" align="center">
+                            {pinceValue}
+                        </Typography>
+                    </CardCanvas>
                 </Grid>
             </Grid>
         </div>

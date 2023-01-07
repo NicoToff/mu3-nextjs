@@ -13,7 +13,7 @@ type ColonneLumineuseProps = {
 };
 export function ColonneLumineuse({ redState, orangeState, greenState, blueState }: ColonneLumineuseProps) {
     return (
-        <CardCanvas title="Colonne lumineuse" subheader="État de la colonne 5 en temps réel">
+        <CardCanvas title="Colonne lumineuse" subheader="État de la colonne à l'armoire 5.">
             <CardActions disableSpacing sx={{ display: "flex", justifyContent: "center" }}>
                 <LumIcon sx={{ color: redState ? red[600] : OFF }} fontSize="large" />
                 <LumIcon sx={{ color: orangeState ? orange[600] : OFF }} fontSize="large" />
