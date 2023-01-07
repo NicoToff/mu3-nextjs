@@ -21,7 +21,7 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" href="/mqtt">
+                        <Link className="nav-link" href="/admin">
                             Admin panel
                         </Link>
                     </li>
