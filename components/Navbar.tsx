@@ -1,7 +1,8 @@
-import { signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 
 const Navbar = () => {
+    const { data: session } = useSession();
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -29,11 +30,16 @@ const Navbar = () => {
                             Système intelligent
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item ms-5 ">
                         <button className="btn btn-secondary" onClick={() => signOut()}>
                             Déconnexion
                         </button>
                     </li>
+                    {session && session.user && (
+                        <li className="nav-item small">
+                            <span className="nav-link">Connecté en tant que : {session.user.name}</span>
+                        </li>
+                    )}
                 </ul>
             </div>
         </nav>

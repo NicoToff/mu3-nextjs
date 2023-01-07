@@ -1,9 +1,11 @@
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import { type NextPage } from "next";
 import { Typography } from "@mui/material";
 
 const Home: NextPage = () => {
+    const { data: session } = useSession();
     return (
         <>
             <Head>
@@ -15,6 +17,11 @@ const Home: NextPage = () => {
                 <Typography variant="h2" component="h1" mt={3}>
                     MU3 zone 5 et 3
                 </Typography>
+                {session && session.user && (
+                    <Typography variant="overline" fontSize={24} gutterBottom>
+                        Bienvenue, {session.user.name} !
+                    </Typography>
+                )}
                 <Typography variant="body1">
                     Sur la navbar vous pouvez aller à l&apos;une des pages suivante :
                 </Typography>
