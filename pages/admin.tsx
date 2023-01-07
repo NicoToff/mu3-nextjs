@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import Chip from "@mui/material/Chip";
-import Container from "@mui/material/Container";
+import { MqttConnected } from "../components/MqttConnected";
 import Typography from "@mui/material/Typography";
 import Switch from "@mui/material/Switch";
 import { DataGrid } from "@mui/x-data-grid";
@@ -143,11 +142,7 @@ export default function Mqtt({ tags }: MqttProps) {
             <Typography variant="h2" component="h1" m={3}>
                 MU3 Tags
             </Typography>
-            {mqttConnected ? (
-                <Chip label="MQTT Connected" color="success" sx={{ mb: 3 }} />
-            ) : (
-                <Chip label="MQTT Disconnected" color="error" sx={{ mb: 3 }} />
-            )}
+            <MqttConnected connected={mqttConnected} />
             <Typography gutterBottom>{`Le tableau ci-dessous est mis à jour en temps réel. Les tags marqués "Actifs"
                 seront visibles sur la page Dashboard.`}</Typography>
             <div style={{ height: "95vh", width: "99%" }}>

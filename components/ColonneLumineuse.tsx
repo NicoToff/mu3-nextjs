@@ -1,5 +1,3 @@
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardActions from "@mui/material/CardActions";
 import LumIcon from "@mui/icons-material/Lightbulb";
 import { CardCanvas } from "./_CardCanvas";
