@@ -26,12 +26,14 @@ const Home: NextPage = () => {
                     Sur la navbar vous pouvez aller à l&apos;une des pages suivante :
                 </Typography>
                 <Typography variant="body1">
-                    - Dashboard dans laquel vous verrez certains mots techniques choisis par le technicien
+                    - Dashboard dans laquel vous verrez les variables choisies par l&apos;administrateur
                 </Typography>
-                <Typography variant="body1">- Panel admin dans laquel vous verez tout les mots techniques</Typography>
                 <Typography variant="body1">
-                    - Système intelligent dans laquel on vous parlera du servodrive pour le système d&apos;avance film
-                    de la zone 3
+                    - Admin panel dans laquel vous verrez la listes de tous les tags
+                </Typography>
+                <Typography variant="body1">
+                    - Système intelligent dans lequel vous trouverez des indications sur les valeurs renvoyées par des
+                    tags précis
                 </Typography>
             </div>
             <div className="text-center mt-3">

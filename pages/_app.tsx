@@ -17,7 +17,7 @@ const MyApp: AppType<{ session: Session | null }> = ({ Component, pageProps: { s
             <Head>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+                <link rel="icon" type="image/png" href="/images/favicon.png" />
             </Head>
 
             <SessionProvider session={session}>

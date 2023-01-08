@@ -20,9 +20,7 @@ export async function getServerSideProps() {
         },
     });
     return {
-        props: {
-            tags: JSON.parse(JSON.stringify(tags)),
-        },
+        props: { tags },
     };
 }
 
@@ -39,7 +37,7 @@ const options = {
 type MqttProps = { tags: Tag[] };
 
 export default function Mqtt({ tags }: MqttProps) {
-    const [tagMap, setTagMap] = useState(new Map<string, number>(tags.map(t => [t.name, t.isVisible ? 1 : 0])));
+    const [tagMap, setTagMap] = useState(new Map<string, number>(tags.map(tag => [tag.name, tag.isVisible ? 1 : 0])));
 
     const [rows, setRows] = useState<GridRowsProp>([]);
 
